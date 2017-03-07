@@ -27,11 +27,19 @@ namespace PizzaTeamBot
                 
                if (activity.MentionsRecipient() && activity.Text.Contains("(beer)"))
                 {
-                    Activity reply = activity.CreateReply($"${activity.Recipient.Name} has been awarded a beer by ${activity.From.Name}");
-                    await connector.Conversations.SendToConversationAsync(reply);
-                } else if (activity.Recipient.Id =  && activity.Text.Contains("Beer standings"))
+                    if (activity.Recipient.Name == "PizzaBot")
+                    {
+                        var reply = activity.CreateReply("Thanks but I am too young to drink a beer");
+                        await connector.Conversations.SendToConversationAsync(reply);
+                    }
+                    else
+                    {
+                        Activity reply = activity.CreateReply($"${activity.Recipient.Name} has been awarded a beer by ${activity.From.Name}");
+                        await connector.Conversations.SendToConversationAsync(reply);
+                    }
+                } else if (activity.Recipient.Name == "PizzaBot"  && activity.Text.Contains("standings"))
                 {
-
+                    Activity reply = activity.CreateReply($"Current Standings: {0000}");
                 }
                 
             }
